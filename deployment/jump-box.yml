@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fabric-cli
+  labels:
+    app: cli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cli
+  template:
+    metadata:
+      labels:
+        app: cli
+    spec:
+      containers:
+      - name: cli
+        image: hyperledger/fabric-tools:1.2.1
+        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+        volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      initContainers:
+      - name: install
+        image: hyperledger/fabric-tools:1.2.1
+        command:
+        - wget
+        - "-O"
+        - "/work-dir/index.html"
+        - http://kubernetes.io
+        volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      volumes:
+      - name: workdir
+        emptyDir: {}
