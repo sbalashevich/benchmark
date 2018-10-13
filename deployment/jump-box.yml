@@ -19,19 +19,33 @@ spec:
         image: hyperledger/fabric-tools:1.2.1
         command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
         volumeMounts:
-        - name: workdir
-          mountPath: "/work-dir"
+        - name: orderer
+          mountPath: "/orderer"
       initContainers:
       - name: install
         image: hyperledger/fabric-tools:1.2.1
-        command:
-        - wget
-        - "-O"
-        - "/work-dir/index.html"
-        - http://kubernetes.io
+        command: ["/bin/bash", "-c"]
+        args:
+         - git clone https://github.com/sbalashevich/benchmark && cd benchmark && ./jumpboxinit.sh
         volumeMounts:
-        - name: workdir
-          mountPath: "/work-dir"
+        - name: orderer
+          mountPath: "/orderer"
+        - name: org1peer1
+          mountPath: "/org1peer1"
+        - name: org1peer2
+          mountPath: "/org1peer2"
+        - name: org2peer1
+          mountPath: "/org2peer1"
+        - name: org2peer2
+          mountPath: "/org2peer2"
       volumes:
-      - name: workdir
+      - name: orderer
+        emptyDir: {}
+      - name: org1peer1
+        emptyDir: {}
+      - name: org1peer2
+        emptyDir: {}
+      - name: org2peer1
+        emptyDir: {}
+      - name: org2peer2
         emptyDir: {}
