@@ -44,6 +44,8 @@ spec:
           value: "/etc/hyperledger/fabric/tls/server.key"
         - name: CORE_PEER_TLS_ROOTCERT_FILE
           value: "/etc/hyperledger/fabric/tls/ca.crt"
+        - name: FABRIC_CFG_PATH
+          value: "/etc/hyperledger/fabric/"
 
         volumeMounts:
         - name: crypto
