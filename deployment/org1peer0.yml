@@ -30,10 +30,24 @@ spec:
           value: "org1peer0.default.svc.cluster.local:7051"
         - name: CORE_PEER_LOCALMSPID
           value: "Org1MSP"
+        - name: CORE_PEER_TLS_ENABLED
+          value: "true"
+        - name: CORE_PEER_GOSSIP_USELEADERELECTION
+          value: "true"
+        - name: CORE_PEER_GOSSIP_ORGLEADER
+          value: "false"
+        - name: CORE_PEER_PROFILE_ENABLED
+          value: "true"
+        - name: CORE_PEER_TLS_CERT_FILE
+          value: "/etc/hyperledger/fabric/tls/server.crt"
+        - name: CORE_PEER_TLS_KEY_FILE
+          value: "/etc/hyperledger/fabric/tls/server.key"
+        - name: CORE_PEER_TLS_ROOTCERT_FILE
+          value: "/etc/hyperledger/fabric/tls/ca.crt"
 
         volumeMounts:
         - name: crypto
-          mountPath: "/org1peer0"
+          mountPath: "/etc/hyperledger/fabric/"
       volumes:
       - name: crypto
         persistentVolumeClaim:
