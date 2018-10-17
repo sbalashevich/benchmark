@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: o1p0
+  labels:
+    app: o1p0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: o1p0
+  template:
+    metadata:
+      labels:
+        app: o1p0
+    spec:
+      containers:
+      - name: o1p0
+        image: hyperledger/fabric-peer
+#        command: ["orderer"]
+        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+        env:
+        - name: CORE_PEER_ID
+          value: "org1peer0.default.svc.cluster.local"
+        - name: CORE_PEER_ADDRESS
+          value: "org1peer0.default.svc.cluster.local:7051"
+        - name: CORE_PEER_GOSSIP_BOOTSTRAP
+          value: "org1peer1.default.svc.cluster.local:7051"
+        - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
+          value: "org1peer0.default.svc.cluster.local:7051"
+        - name: CORE_PEER_LOCALMSPID
+          value: "Org1MSP"
+
+        volumeMounts:
+        - name: crypto
+          mountPath: "/org1peer0"
+      volumes:
+      - name: crypto
+        persistentVolumeClaim:
+          claimName: org1peer0-claim
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: org1peer0
+spec:
+  selector:
+    app: o1p0
+  ports:
+  - protocol: TCP
+    name: p1
+    port: 7051
+    targetPort: 7051
+  - protocol: TCP
+    name: p2
+    port: 7053
+    targetPort: 7053

@@ -1,0 +1,27 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: orderer
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100M
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: "/mnt/orderer"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: orderer-claim
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10M

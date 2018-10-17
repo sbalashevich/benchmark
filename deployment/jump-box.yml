@@ -15,45 +15,12 @@ spec:
         app: cli
     spec:
       containers:
-      - name: orderer
-        image: hyperledger/fabric-orderer
+      - name: cli
+        image: hyperledger/fabric-tools:1.2.1
         command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
-    environment:
-    - ORDERER_GENERAL_LOGLEVEL=INFO
-    - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-    - ORDERER_GENERAL_GENESISMETHOD=file
-    - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-    - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
-    - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-    # enabled TLS
-    - ORDERER_GENERAL_TLS_ENABLED=true
-    - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-    - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-    - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-        env:
-        - name: ORDERER_GENERAL_LOGLEVEL
-          value: INFO
-        - name: ORDERER_GENERAL_LISTENADDRESS
-          value: 0.0.0.0
-        - name: ORDERER_GENERAL_GENESISMETHOD
-          value: file
-        - name: ORDERER_GENERAL_GENESISFILE
-          value: /benchmark/channel-artifacts/genesis.block
-        - name: ORDERER_GENERAL_LOCALMSPID
-          value: OrdererMSP
-        - name: ORDERER_GENERAL_LOCALMSPDIR
-          value: /benchmark/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/
-        - name: ORDERER_GENERAL_TLS_ENABLED
-          value: true
-        - name: ORDERER_GENERAL_TLS_PRIVATEKEY
-          value: /benchmark/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.key
-        - name: ORDERER_GENERAL_TLS_CERTIFICATE
-          value: /benchmark/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-        - name: ORDERER_GENERAL_TLS_ROOTCAS
-          value: /benchmark/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt
         volumeMounts:
         - name: orderer
-          mountPath: "/orderer"
+          mountPath: "/org1peer0"
       initContainers:
       - name: install
         image: hyperledger/fabric-tools:1.2.1
@@ -63,8 +30,8 @@ spec:
         volumeMounts:
         - name: orderer
           mountPath: "/orderer"
-        - name: org1peer1
-          mountPath: "/org1peer1"
+        - name: org1peer0
+          mountPath: "/org1peer0"
         - name: org1peer2
           mountPath: "/org1peer2"
         - name: org2peer1
@@ -73,9 +40,11 @@ spec:
           mountPath: "/org2peer2"
       volumes:
       - name: orderer
-        emptyDir: {}
-      - name: org1peer1
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: orderer-claim
+      - name: org1peer0
+        persistentVolumeClaim:
+          claimName: org1peer0-claim
       - name: org1peer2
         emptyDir: {}
       - name: org2peer1
