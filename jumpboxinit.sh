@@ -22,8 +22,6 @@ cp -r crypto-config/ordererOrganizations /orderer/
 cp -r ./channel-artifacts /orderer/
 
 # Org1Peer0
-#        - ../crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/msp
-#        - ../crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
 cp -r crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/* /org1peer0/
 cp -r ./channel-artifacts /org1peer0/
-cp /etc/hyperledger/fabric/core.yaml /org1peer0/
+cp config/core.yaml /org1peer0/
