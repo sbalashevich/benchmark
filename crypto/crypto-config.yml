@@ -25,7 +25,7 @@ PeerOrgs:
 # Org1
 # ---------------------------------------------------------------------------
 - Name: Org1
-  Domain: org1.example.com
+  Domain: default.svc.cluster.local
   EnableNodeOUs: true
   # ---------------------------------------------------------------------------
   # "Specs"

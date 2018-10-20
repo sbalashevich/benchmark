@@ -17,15 +17,16 @@ spec:
       containers:
       - name: o1p0
         image: hyperledger/fabric-peer
-#        command: ["orderer"]
-        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+        command: ["peer"]
+        args: ["node", "start"]
+#        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
         env:
         - name: CORE_PEER_ID
           value: "org1peer0.default.svc.cluster.local"
         - name: CORE_PEER_ADDRESS
           value: "org1peer0.default.svc.cluster.local:7051"
         - name: CORE_PEER_GOSSIP_BOOTSTRAP
-          value: "org1peer1.default.svc.cluster.local:7051"
+          value: ""
         - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
           value: "org1peer0.default.svc.cluster.local:7051"
         - name: CORE_PEER_LOCALMSPID
@@ -37,7 +38,7 @@ spec:
         - name: CORE_PEER_GOSSIP_ORGLEADER
           value: "false"
         - name: CORE_PEER_PROFILE_ENABLED
-          value: "true"
+          value: "false"
         - name: CORE_PEER_TLS_CERT_FILE
           value: "/etc/hyperledger/fabric/tls/server.crt"
         - name: CORE_PEER_TLS_KEY_FILE
@@ -85,3 +86,7 @@ spec:
     name: p2
     port: 7053
     targetPort: 7053
+  - protocol: TCP
+    name: p3
+    port: 7052
+    targetPort: 7052
