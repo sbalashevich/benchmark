@@ -11,7 +11,7 @@ OrdererOrgs:
 # Orderer
 # ---------------------------------------------------------------------------
 - Name: Orderer
-  Domain: default.svc.cluster.local
+  Domain: master.svc.cluster.local
   # ---------------------------------------------------------------------------
   # "Specs" - See PeerOrgs below for complete description
   # ---------------------------------------------------------------------------
@@ -25,7 +25,7 @@ PeerOrgs:
 # Org1
 # ---------------------------------------------------------------------------
 - Name: Org1
-  Domain: default.svc.cluster.local
+  Domain: org1.svc.cluster.local
   EnableNodeOUs: true
   # ---------------------------------------------------------------------------
   # "Specs"
@@ -75,7 +75,7 @@ PeerOrgs:
 # Org2: See "Org1" for full specification
 # ---------------------------------------------------------------------------
 - Name: Org2
-  Domain: org2.example.com
+  Domain: org2.svc.cluster.local
   EnableNodeOUs: true
   Template:
     Count: 2

@@ -1,34 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: o1p0
+  name: peer0
+  namespace: org1
   labels:
-    app: o1p0
+    app: peer0
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: o1p0
+      app: peer0
   template:
     metadata:
       labels:
-        app: o1p0
+        app: peer0
     spec:
       containers:
-      - name: o1p0
+      - name: peer0
         image: hyperledger/fabric-peer
         command: ["peer"]
         args: ["node", "start"]
 #        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
         env:
         - name: CORE_PEER_ID
-          value: "org1peer0.default.svc.cluster.local"
+          value: "peer0.org1.svc.cluster.local"
         - name: CORE_PEER_ADDRESS
-          value: "org1peer0.default.svc.cluster.local:7051"
+          value: "peer0.org1.svc.cluster.local:7051"
         - name: CORE_PEER_GOSSIP_BOOTSTRAP
           value: ""
         - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
-          value: "org1peer0.default.svc.cluster.local:7051"
+          value: "peer0.org1.svc.cluster.local:7051"
         - name: CORE_PEER_LOCALMSPID
           value: "Org1MSP"
         - name: CORE_PEER_TLS_ENABLED
@@ -73,10 +74,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: org1peer0
+  name: peer0
+  namespace: org1
 spec:
   selector:
-    app: o1p0
+    app: peer0
   ports:
   - protocol: TCP
     name: p1

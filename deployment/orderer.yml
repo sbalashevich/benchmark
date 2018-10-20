@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: orderer
+  namespace: master
   labels:
     app: orderer
 spec:
@@ -31,15 +32,15 @@ spec:
         - name: ORDERER_GENERAL_LOCALMSPID
           value: "OrdererMSP"
         - name: ORDERER_GENERAL_LOCALMSPDIR
-          value: "/orderer/ordererOrganizations/example.com/orderers/orderer.example.com/msp/"
+          value: "/orderer/msp/"
         - name: ORDERER_GENERAL_TLS_ENABLED
           value: "true"
         - name: ORDERER_GENERAL_TLS_PRIVATEKEY
-          value: "/orderer/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.key"
+          value: "/orderer/tls/server.key"
         - name: ORDERER_GENERAL_TLS_CERTIFICATE
-          value: "/orderer/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt"
+          value: "/orderer/tls/server.crt"
         - name: ORDERER_GENERAL_TLS_ROOTCAS
-          value: "/orderer/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
+          value: "/orderer/ca.crt"
         volumeMounts:
         - name: orderer
           mountPath: "/orderer"
@@ -51,6 +52,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
+  metadata: master
   name: orderer
 spec:
   selector:

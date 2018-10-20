@@ -11,4 +11,8 @@ kubectl delete pvc/org1peer0-claim
 kubectl delete pv/orderer
 kubectl delete pv/org1peer0
 
+kubectl delete namespace orderer
+kubectl delete namespace org1
+kubectl delete namespace org2
+
 
