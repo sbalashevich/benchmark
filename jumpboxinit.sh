@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-export CHANNEL_NAME="mychannel"
+export CHANNEL_NAME="testchannel"
 
 
 export LOCAL_FOLDER=/benchmark/crypto-config
@@ -18,10 +18,10 @@ configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts
 configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
 
 # ORDERER
-cp -r crypto-config/ordererOrganizations/master.svc.cluster.local/orderers/orderer.master.svc.cluster.local/ /orderer/
+cp -r crypto-config/ordererOrganizations/master.svc.cluster.local/orderers/orderer.master.svc.cluster.local/* /orderer/
 cp -r ./channel-artifacts /orderer/
 
 # Org1Peer0
-cp -r crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer0.default.svc.cluster.local/* /org1peer0/
+cp -r crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer0.org1.svc.cluster.local/* /org1peer0/
 cp -r ./channel-artifacts /org1peer0/
 cp config/core.yaml /org1peer0/
