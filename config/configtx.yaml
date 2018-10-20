@@ -36,7 +36,7 @@ Organizations:
             Rule: "OR('OrdererMSP.admin')"
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: crypto-config/ordererOrganizations/example.com/msp
+        MSPDir: crypto-config/ordererOrganizations/default.svc.cluster.local/msp
 
     - &Org1
         # DefaultOrg defines the organization which is used in the sampleconfig
@@ -46,7 +46,7 @@ Organizations:
         # ID to load the MSP definition as
         ID: Org1MSP
 
-        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
+        MSPDir: crypto-config/peerOrganizations/org1.default.svc.cluster.local/msp
 
         Policies:
           Readers:
@@ -183,7 +183,7 @@ Orderer: &OrdererDefaults
     OrdererType: solo
 
     Addresses:
-        - orderer.example.com:7050
+        - orderer.default.svc.cluster.local:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
