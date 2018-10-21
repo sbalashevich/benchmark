@@ -18,9 +18,9 @@ spec:
       containers:
       - name: peer0
         image: hyperledger/fabric-peer
-        command: ["peer"]
-        args: ["node", "start"]
-#        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+#        command: ["peer"]
+#        args: ["node", "start"]
+        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
         env:
         - name: CORE_PEER_ID
           value: "peer0.org1.svc.cluster.local"

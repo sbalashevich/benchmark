@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: orderer
+  name: orderer-master
   namespace: master
 spec:
   storageClassName: hostpath
@@ -33,7 +33,7 @@ spec:
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: org1peer0
+  name: org1peer0-org1
   namespace: org1
 spec:
   storageClassName: hostpath
@@ -42,7 +42,7 @@ spec:
   accessModes:
   - ReadWriteOnce
   hostPath:
-    path: "/tmp/org1peer0_master/"
+    path: "/tmp/org1peer0_org1"
 
 ---
 kind: PersistentVolumeClaim

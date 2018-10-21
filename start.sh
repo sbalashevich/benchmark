@@ -20,9 +20,9 @@ kubectl apply -f deployment/jump-box.yml
 sleep 20
 
 cp -r /tmp/orderer/* /tmp/orderer_master/
-cp -r /tmp/org1peer0/* /tmp/org1peer0_master/
+cp -r /tmp/org1peer0/* /tmp/org1peer0_org1/
 
-kubectl apply -f deployment/orderer_withnamespaces.yml
+kubectl apply -f deployment/volumes_withnamespaces.yml
 
 sleep 2
 
@@ -30,4 +30,4 @@ sleep 2
 kubectl apply -f deployment/orderer.yml
 
 
-#kubectl apply -f deployment/org1peer0.yml
+kubectl apply -f deployment/org1peer0.yml
