@@ -19,8 +19,8 @@ spec:
         image: hyperledger/fabric-tools:1.2.1
         command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
         volumeMounts:
-        - name: orderer
-          mountPath: "/org1peer0"
+        - name: volume
+          mountPath: "/volume"
       initContainers:
       - name: install
         image: hyperledger/fabric-tools:1.2.1
@@ -28,6 +28,8 @@ spec:
         args:
          - git clone https://github.com/sbalashevich/benchmark && cd benchmark && ./jumpboxinit.sh
         volumeMounts:
+        - name: volume
+          mountPath: "/volume"
         - name: orderer
           mountPath: "/orderer"
         - name: org1peer0
@@ -39,6 +41,9 @@ spec:
         - name: org2peer2
           mountPath: "/org2peer2"
       volumes:
+      - name: volume
+        persistentVolumeClaim:
+          claimName: volume1-claim
       - name: orderer
         persistentVolumeClaim:
           claimName: orderer-claim

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-kubectl delete deploy/o1p0
-kubectl delete deploy/orderer
+kubectl delete deploy/peer0 --namespace=org1
+kubectl delete deploy/orderer  --namespace=master
 kubectl delete deploy/fabric-cli
 
 

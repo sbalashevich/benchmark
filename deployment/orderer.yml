@@ -52,8 +52,8 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  metadata: master
   name: orderer
+  namespace: master
 spec:
   selector:
     app: orderer

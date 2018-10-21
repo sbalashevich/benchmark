@@ -17,6 +17,9 @@ configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/c
 configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
 configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
 
+# test
+cp config/core.yaml /volume/
+
 # ORDERER
 cp -r crypto-config/ordererOrganizations/master.svc.cluster.local/orderers/orderer.master.svc.cluster.local/* /orderer/
 cp -r ./channel-artifacts /orderer/
