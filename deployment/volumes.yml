@@ -1,0 +1,55 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: orderer
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 100M
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: "/tmp/orderer/"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: orderer-claim
+spec:
+  storageClassName: hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100M
+
+
+# peer 0 org 1
+
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: org1peer0
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 100M
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: "/tmp/org1peer0/"
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: org1peer0-claim
+spec:
+  storageClassName: hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100M

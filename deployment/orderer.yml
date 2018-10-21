@@ -18,8 +18,8 @@ spec:
       containers:
       - name: orderer
         image: hyperledger/fabric-orderer
-        command: ["orderer"]
-#        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+#        command: ["orderer"]
+        command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
         env:
         - name: ORDERER_GENERAL_LOGLEVEL
           value: "INFO"
