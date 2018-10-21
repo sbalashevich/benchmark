@@ -16,7 +16,7 @@ kubectl delete pv/orderer-master  --namespace=org1
 kubectl delete pv/org1peer0-org1  --namespace=org1
 
 kubectl delete svc/orderer --namespace=master
-kubectl delete svc/org1peer0 --namespace=org1
+kubectl delete svc/peer0 --namespace=org1
 
 
 kubectl delete namespace master
