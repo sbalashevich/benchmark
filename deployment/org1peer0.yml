@@ -46,6 +46,8 @@ spec:
           value: "/etc/hyperledger/fabric/tls/server.key"
         - name: CORE_PEER_TLS_ROOTCERT_FILE
           value: "/etc/hyperledger/fabric/tls/ca.crt"
+        - name: CORE_PEER_MSPCONFIGPATH
+          value: "/etc/hyperledger/fabric/Admin@org1.example.com/msp"
         - name: FABRIC_CFG_PATH
           value: "/etc/hyperledger/fabric/"
         - name: CORE_LEDGER_STATE_STATEDATABASE

@@ -23,5 +23,7 @@ cp -r ./channel-artifacts /orderer/
 
 # Org1Peer0
 cp -r crypto-config/peerOrganizations/org1.svc.cluster.local/peers/peer0.org1.svc.cluster.local/* /org1peer0/
+cp -r crypto-config/peerOrganizations/org1.svc.cluster.local/users/Admin\@org1.svc.cluster.local /org1peer0/
+cp -r crypto-config/peerOrganizations/org1.svc.cluster.local/users/User1\@org1.svc.cluster.local /org1peer0/
 cp -r ./channel-artifacts /org1peer0/
 cp config/core.yaml /org1peer0/
